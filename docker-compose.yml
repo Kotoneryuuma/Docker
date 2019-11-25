@@ -33,12 +33,10 @@ services:
     depends_on:
       - python
 
-  # front:
-  #   build:
-  #     context: ./front
-  #   command: 'sh /app/start.sh'
-  #   volumes:
-  #     - ./front:/app/:cached
-  #     - ./front/node_modules:/app/node_modules
-  #   ports:
-  #     - "8080:8080"
+  vue_js:
+    build: ./vue_js
+    ports:
+      - 1234:8080
+    volumes:
+      - ./vue_js:/work
+    

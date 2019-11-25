@@ -7,14 +7,32 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/edit/{{ todo.todo_id }}/process" method="post">
-        {% csrf_token %}
-        <p>Title:  <input name="title" type="text" value="{{ todo.title }}"></p>
-        <p>通知日時:  <input name="remind_at" type="datetime-local" value="{{ todo.remind_at }}"></p>
-        <input type="hidden" name="whatever" value="{{todo.todo_id}}">
-        <input type="hidden" name="created_at" value="{{todo.created_at}}">
-        <button type="submit">Update</button>
-    </form>
+
+    <table>
+            <thead>
+                <tr>
+                    <th>タイトル</th>
+                    <th>通知日時</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <form action="/edit/{{ todo.todo_id }}/process" method="post">{% csrf_token %}
+                        <td>
+                            <input name="title" type="text" value="{{ todo.title }}">
+                        </td>
+                        <td>
+                            <input name="remind_at" type="datetime-local" value="{{ todo.remind_at }}">
+                        </td>
+                        <td>
+                            <input type="hidden" name="whatever" value="{{todo.todo_id}}">
+                            <input type="hidden" name="created_at" value="{{todo.created_at}}">
+                            <button type="submit">Update</button>
+                        </td>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
 
 </body>
 </html>
