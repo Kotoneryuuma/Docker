@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div name='Add'>
+        <h2>Making a list</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>タイトル</th>
+                    <th>通知日時</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <form action="/addTodo" method="post">{% csrf_token %}
+                        <td>
+                            <input type="text" name="title">
+                        </td>
+                        <td>
+                            <input type="datetime-local" name="remind_at">
+                        </td>
+                        <td>
+                            <input type="submit" value="Add">
+                        </td>
+                        <!-- <button type="submit">Add</button> -->
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+        
+        
+        <!-- <form action="/addTodo" method="post">{% csrf_token %}
+            <label>タイトル</label>
+                <input type="text" name="title">
+            <label>通知日時</label>
+                <input type="datetime-local" name="remind_at">
+                date:"m月d日 H時:i分"
+            <input type="submit" value="Add">
+            <button type="submit">Add</button> -->
+        <!-- </form> -->
+    </div>
+
+
+    <div name = "lists">
+        <h2>Todo lists</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>作成日時</th>
+                    <th>通知日時</th>
+                    <th>アクション</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for todo in all_todo %}
+            <tr>
+                <td>{{ todo.title }}</td>
+                <td>{{ todo.updated_at | date:"m月d日 H時:i分" }}</td>
+                <td>{{ todo.remind_at | date:"m月d日 H時:i分"}}</td>
+                <td>
+                    <a href="/editTodo/{{ todo.todo_id }}">
+                        <button type="button">Edit</button>
+                    </a>  <form action="/deleteTodo/{{ todo.todo_id }}" 
+                    style = "display: inline;"
+                    method="post">{% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+                
+            
+    </div>
+</body>
+</html>

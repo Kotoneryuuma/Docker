@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/edit/{{ todo.todo_id }}/process" method="post">
+        {% csrf_token %}
+        <p>Title:  <input name="title" type="text" value="{{ todo.title }}"></p>
+        <p>通知日時:  <input name="remind_at" type="datetime-local" value="{{ todo.remind_at }}"></p>
+        <input type="hidden" name="whatever" value="{{todo.todo_id}}">
+        <input type="hidden" name="created_at" value="{{todo.created_at}}">
+        <button type="submit">Update</button>
+    </form>
+
+</body>
+</html>
