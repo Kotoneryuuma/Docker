@@ -7,16 +7,96 @@
     <title>Document</title>
 
     {% load static %}	
-    <link rel="stylesheet" href="{% static 'js/hello_vue.js' %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static 'todo/js/todo.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.9/push.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+     <!-- <link rel="stylesheet" href="{% static 'todo/js/todo.js' %}"> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+
+    <style>
+        * {
+        padding: 0px;
+        margin: 0px; 
+        background-color:rgb(0, 183, 255);}
+
+        .box{
+            width: 1600px;
+            height: 100px;
+            display: inline-block;
+            vertical-align: top;
+            /* background-color: aqua; */
+            text-align: center;
+            margin: 0 auto;
+            padding-top: 50px;
+        }
+        .box_top{
+            margin: 0 auto;
+            padding-top: 10px;
+            /* background-color: bisque; */
+        }
+        
+    </style>
+
+    <script>
+
+        function dispText(){
+            var time  = document.add.remind_at.value;
+            console.log('入力した名前は' + time + 'です' );
+            Push.create("設定時間に通知します");
+        }
+
+        var now = new Date();
+        function LoadProc() {
+            var target = document.getElementById("DateTimeDisp");
+
+            var Year = now.getFullYear();
+            var Month = now.getMonth()+1;
+            var Date = now.getDate();
+            var Hour = now.getHours();
+            var Min = now.getMinutes();
+            var Sec = now.getSeconds();
+
+            var nowtime = (Year + "年" + Month + "月" + Date + "日" + Hour + ":" + Min + ":" + Sec);
+            console.log(nowtime)
+        }
+        LoadProc();
+
+        // const total_Time = 1000;
+        // const oldTime = Date.now();
+
+        // const timerId = setInterval(() => {
+        //     const currentTime = Date.now();
+        //     const diff = currentTime - oldTime;
+        //     const remainMSec = total_Time - diff;
+        //     const remainSec = Math.ceil(remainMSec / 50);
+
+        //     let label = '残り' + remainSec;
+        //     console.log(label);
+        //     if (remainMSec <= 0){
+        //         clearInterval(timerId);
+        //         label = '終了';
+        //     }
+        //     console.log(label);
+        // }, 1000);
+
+        // const title = 'Timestamp Notification';
+        // const options = {
+        //     body: 'Timestamp is set to "01 Jan 2000 00:00:00".',
+        //     timestamp: Date.parse('01 Jan 2000 00:00:00')
+        // };
+        // registration.showNotification(title, options);
+    
+        
+    </script>
+
+    
 
 </head>
 <body>
 
-    <div name='Add'>
-        <h2>Making a list</h2>
-        <table>
+    <div class="box" name='Add'>
+        <h2>Todo list</h2>
+        <table class="box_top">
             <thead>
                 <tr>
                     <th>タイトル</th>
@@ -25,7 +105,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <form action="/addTodo" method="post">{% csrf_token %}
+                    <form name="add" action="/addTodo" method="post">{% csrf_token %}
                         <td>
                             <input type="text" name="title">
                         </td>
@@ -33,7 +113,7 @@
                             <input type="datetime-local" name="remind_at">
                         </td>
                         <td>
-                            <input type="submit" value="Add">
+                            <input type="submit" value="Add" onclick="dispText()">
                         </td>
                     </form>
                 </tr>
@@ -41,9 +121,9 @@
         </table>
     </div>
 
-    <div name = "lists">
+    <div class="box" id="buttom" name = "lists">
         <h2>Todo lists</h2>
-        <table>
+        <table class="box_top">
             <thead>
                 <tr>
                     <th>Title</th>
@@ -71,20 +151,6 @@
             </tbody>
         </table>
 
-
-
-
-        {% load static %}
-        <!-- <script src="https://unpkg.com/vue"></script>
-        <script src="./main.js"></script> -->
-        <link rel="stylesheet" href="{% static 'js/hello_vue.js' %}">
-
-        <h2>koko</h2>
-        <div id="app">
-            {{ message }}
-        </div>
-            
-    
     </div>
 </body>
 </html>

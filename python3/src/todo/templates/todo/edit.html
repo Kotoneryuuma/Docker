@@ -5,10 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    {% load static %}	
+    <script src="{% static 'todo/js/todo.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.9/push.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- <link rel="stylesheet" href="{% static 'todo/js/todo.js' %}"> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+
+    <style>
+        * {
+        padding: 0px;
+        margin: 0px; 
+        background-color:rgb(0, 183, 255);}
+        
+        h2{
+            margin: 0 auto;
+            /* background-color: blue; */
+            text-align: center;
+            padding-top: 200px;
+        }
+        .edit_top{
+            margin: 0 auto;
+            /* background-color: bisque; */
+            padding-top: 10px;
+        }
+    
+    </style>
+
+    <script>
+        function dispText(){
+            var time  = document.edit.remind_at.value;
+            console.log('入力した名前は' + time + 'です' );
+            Push.create("設定時間に通知します");
+        }
+    
+    </script>
+
 </head>
 <body>
-
-    <table>
+    <h2>Edit Title</h2>
+    <table class="edit_top">
             <thead>
                 <tr>
                     <th>タイトル</th>
@@ -17,7 +54,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <form action="/edit/{{ todo.todo_id }}/process" method="post">{% csrf_token %}
+                    <form name="edit" action="/edit/{{ todo.todo_id }}/process" method="post">{% csrf_token %}
                         <td>
                             <input name="title" type="text" value="{{ todo.title }}">
                         </td>
@@ -27,7 +64,7 @@
                         <td>
                             <input type="hidden" name="whatever" value="{{todo.todo_id}}">
                             <input type="hidden" name="created_at" value="{{todo.created_at}}">
-                            <button type="submit">Update</button>
+                            <button type="submit" onclick="dispText()">Update</button>
                         </td>
                     </form>
                 </tr>
