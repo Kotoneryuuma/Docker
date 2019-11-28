@@ -6,11 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.7/push.min.js"></script> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
-
-    <!-- {% load static %}	
-    <link rel="stylesheet" href="{% static 'todo/js/hello_vue.js' %}"> -->
+    {% load static %}	
+    <link rel="stylesheet" href="{% static 'js/hello_vue.js' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.9/push.min.js"></script>
 
 </head>
 <body>
@@ -73,11 +72,17 @@
         </table>
 
 
-        <h1>My App</h1>
-        <div id="app"></div>
 
-        <script src="https://unpkg.com/vue"></script>
-        <script src="./main.js"></script>
+
+        {% load static %}
+        <!-- <script src="https://unpkg.com/vue"></script>
+        <script src="./main.js"></script> -->
+        <link rel="stylesheet" href="{% static 'js/hello_vue.js' %}">
+
+        <h2>koko</h2>
+        <div id="app">
+            {{ message }}
+        </div>
             
     
     </div>
